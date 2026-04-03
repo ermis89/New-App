@@ -41,91 +41,70 @@ export default function LoginPage() {
   }
 
   return (
-    <main style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', padding: '1.25rem' }}>
-      <section
-        style={{
-          width: '100%',
-          maxWidth: 460,
-          backgroundColor: '#fff',
-          borderRadius: 16,
-          border: '1px solid #e2e8f0',
-          boxShadow: '0 12px 30px rgba(15, 23, 42, 0.08)',
-          padding: '1.75rem',
-        }}
-      >
-        <p style={{ margin: 0, color: '#2563eb', fontWeight: 600, fontSize: '0.9rem' }}>Welcome back</p>
-        <h1 style={{ margin: '0.55rem 0 0.5rem', fontSize: '1.75rem' }}>Log in</h1>
-        <p style={{ marginTop: 0, color: '#64748b' }}>Continue where you left off in your studio workspace.</p>
-
-        <form onSubmit={onSubmit} style={{ display: 'grid', gap: 12, marginTop: '1.1rem' }}>
-          <fieldset disabled={loading} style={{ margin: 0, padding: 0, border: 'none', display: 'grid', gap: 12 }}>
-            <label style={{ display: 'grid', gap: 6, fontWeight: 500, color: '#0f172a' }}>
-              Email
-              <input
-                name="email"
-                type="email"
-                autoComplete="email"
-                placeholder="you@example.com"
-                required
-                style={{
-                  padding: '0.72rem 0.8rem',
-                  borderRadius: 10,
-                  border: '1px solid #cbd5e1',
-                  fontSize: '0.98rem',
-                }}
-              />
-            </label>
-            <label style={{ display: 'grid', gap: 6, fontWeight: 500, color: '#0f172a' }}>
-              Password
-              <input
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                placeholder="Your password"
-                required
-                style={{
-                  padding: '0.72rem 0.8rem',
-                  borderRadius: 10,
-                  border: '1px solid #cbd5e1',
-                  fontSize: '0.98rem',
-                }}
-              />
-            </label>
-          </fieldset>
-          <button
-            type="submit"
-            disabled={loading}
-            style={{
-              padding: '0.75rem',
-              borderRadius: 10,
-              border: 'none',
-              backgroundColor: '#2563eb',
-              color: '#fff',
-              fontWeight: 600,
-              cursor: 'pointer',
-            }}
-          >
-            {loading ? 'Logging in...' : 'Log in'}
-          </button>
-        </form>
-
-        {error ? (
-          <p role="alert" style={{ color: 'crimson', marginBottom: 0 }}>
-            {error}
+    <main className="auth-shell">
+      <section className="auth-layout card">
+        <div className="auth-panel">
+          <p className="eyebrow">Welcome back</p>
+          <h1 style={{ margin: '0.8rem 0 0.45rem', fontSize: '1.9rem' }}>Log in to your studio</h1>
+          <p className="section-subtitle" style={{ marginBottom: 0 }}>
+            Access your dashboard, continue your projects, and keep momentum.
           </p>
-        ) : null}
 
-        <p style={{ color: '#64748b', marginBottom: 0 }}>
-          Need an account?{' '}
-          <Link href="/signup" style={{ color: '#1d4ed8', fontWeight: 600, textDecoration: 'none' }}>
-            Create one
-          </Link>
-        </p>
-        <p style={{ marginTop: 8 }}>
-          <Link href="/" style={{ color: '#475569', textDecoration: 'none' }}>
-            ← Back to home
-          </Link>
-        </p>
+          <form onSubmit={onSubmit} className="form-grid">
+            <fieldset disabled={loading} style={{ margin: 0, padding: 0, border: 'none', display: 'grid', gap: 12 }}>
+              <label className="input-field">
+                Email
+                <input name="email" type="email" autoComplete="email" placeholder="you@example.com" required />
+              </label>
+              <label className="input-field">
+                Password
+                <input
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
+                  placeholder="Your password"
+                  required
+                />
+              </label>
+            </fieldset>
+            <button type="submit" disabled={loading} className="button" style={{ width: '100%' }}>
+              {loading ? 'Logging in...' : 'Log in'}
+            </button>
+          </form>
+
+          {error ? (
+            <p role="alert" className="error-text">
+              {error}
+            </p>
+          ) : null}
+
+          <p style={{ color: '#64748b', marginBottom: 0 }}>
+            Need an account?{' '}
+            <Link href="/signup" style={{ color: '#1d4ed8', fontWeight: 700, textDecoration: 'none' }}>
+              Create one
+            </Link>
+          </p>
+          <p style={{ marginTop: 8 }}>
+            <Link href="/" style={{ color: '#475569', textDecoration: 'none' }}>
+              ← Back to home
+            </Link>
+          </p>
+        </div>
+
+        <aside className="auth-side">
+          <p className="eyebrow" style={{ background: '#1e40af', color: '#dbeafe' }}>
+            Product workspace
+          </p>
+          <h2>Everything in one clean studio experience.</h2>
+          <p>
+            Sign in to manage projects, coordinate your workflow, and build learning products with a focused dashboard.
+          </p>
+          <ul>
+            <li>Session-based auth with secure defaults.</li>
+            <li>Reliable API endpoints already available.</li>
+            <li>Structured UI ready for production iteration.</li>
+          </ul>
+        </aside>
       </section>
     </main>
   );
