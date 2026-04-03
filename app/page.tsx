@@ -2,125 +2,94 @@ import Link from 'next/link';
 
 const features = [
   {
-    title: 'Single app workflow',
-    description: 'Plan, build, and refine learning projects in one focused studio experience.',
+    title: 'Unified product workflow',
+    description: 'Define learning goals, structure content, and move from idea to launch in a single studio.',
   },
   {
-    title: 'Reliable project foundation',
-    description: 'Built on PostgreSQL + Prisma with a shared API contract for predictable behavior.',
+    title: 'Reliable API + data layer',
+    description: 'Backed by Prisma and PostgreSQL foundations so your project flow stays predictable at scale.',
   },
   {
-    title: 'Secure by default',
-    description: 'Session-based authentication with httpOnly cookies keeps sign-in secure and familiar.',
+    title: 'Auth-ready foundation',
+    description: 'Secure session-based authentication keeps onboarding and day-to-day usage dependable.',
   },
 ];
 
 export default function HomePage() {
   return (
-    <main style={{ maxWidth: 1080, margin: '0 auto', padding: '4rem 1.25rem 5rem' }}>
-      <section
-        style={{
-          textAlign: 'center',
-          padding: '4rem 1.5rem',
-          borderRadius: 24,
-          backgroundColor: '#ffffff',
-          boxShadow: '0 15px 45px rgba(15, 23, 42, 0.08)',
-          border: '1px solid #e2e8f0',
-        }}
-      >
-        <p
-          style={{
-            margin: 0,
-            display: 'inline-block',
-            padding: '0.35rem 0.75rem',
-            borderRadius: 999,
-            backgroundColor: '#eff6ff',
-            color: '#1d4ed8',
-            fontWeight: 600,
-            fontSize: '0.875rem',
-          }}
-        >
-          Interactive Learning Studio
-        </p>
-
-        <h1 style={{ margin: '1.25rem 0 1rem', fontSize: 'clamp(2rem, 4vw, 3.2rem)', lineHeight: 1.15 }}>
-          Build learning projects with a clean, local-first studio
-        </h1>
-
-        <p style={{ maxWidth: 680, margin: '0 auto', color: '#475569', fontSize: '1.1rem', lineHeight: 1.7 }}>
-          Ship faster with a minimal Next.js foundation that already includes project APIs, auth flows, and a focused
-          workspace for creators.
-        </p>
-
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 12, marginTop: '2rem', flexWrap: 'wrap' }}>
-          <Link
-            href="/signup"
-            style={{
-              padding: '0.75rem 1.2rem',
-              borderRadius: 10,
-              backgroundColor: '#2563eb',
-              color: '#ffffff',
-              textDecoration: 'none',
-              fontWeight: 600,
-            }}
-          >
-            Get Started
-          </Link>
-          <Link
-            href="/login"
-            style={{
-              padding: '0.75rem 1.2rem',
-              borderRadius: 10,
-              border: '1px solid #cbd5e1',
-              color: '#0f172a',
-              textDecoration: 'none',
-              backgroundColor: '#fff',
-              fontWeight: 600,
-            }}
-          >
+    <main className="page-shell">
+      <nav className="top-nav card">
+        <div className="brand">
+          <span className="brand-mark" aria-hidden="true" />
+          <span>Interactive Learning Studio</span>
+        </div>
+        <div className="nav-links">
+          <Link href="/login" className="ghost-button">
             Log in
           </Link>
-          <Link
-            href="/studio"
-            style={{
-              padding: '0.75rem 1.2rem',
-              borderRadius: 10,
-              color: '#334155',
-              textDecoration: 'none',
-              backgroundColor: '#f8fafc',
-              fontWeight: 600,
-            }}
-          >
-            Open Studio
+          <Link href="/signup" className="button">
+            Start free
           </Link>
         </div>
+      </nav>
+
+      <section className="hero">
+        <article className="card hero-main">
+          <p className="eyebrow">Product-ready Next.js starter</p>
+          <h1>Design, launch, and manage learning experiences with confidence.</h1>
+          <p className="lead">
+            This is more than a scaffold: it is a polished application shell with clear information hierarchy, auth
+            flows, and a studio workspace ready for feature growth.
+          </p>
+          <div className="action-row" style={{ marginTop: '1.2rem' }}>
+            <Link href="/signup" className="button">
+              Create workspace
+            </Link>
+            <Link href="/studio" className="ghost-button">
+              Open studio dashboard
+            </Link>
+          </div>
+
+          <div className="metrics">
+            <div className="metric">
+              <strong>Fast setup</strong>
+              <span style={{ color: '#64748b' }}>Routing, auth, and data primitives already wired.</span>
+            </div>
+            <div className="metric">
+              <strong>3 Core APIs</strong>
+              <span style={{ color: '#64748b' }}>Session, auth, and projects endpoints available immediately.</span>
+            </div>
+            <div className="metric">
+              <strong>Production feel</strong>
+              <span style={{ color: '#64748b' }}>Layout, typography, and spacing designed like a real product.</span>
+            </div>
+          </div>
+        </article>
+
+        <aside className="card hero-side">
+          <h2 style={{ margin: 0, fontSize: '1.2rem' }}>Why teams use this foundation</h2>
+          <ul>
+            <li>Clear homepage messaging and conversion-focused call-to-action flow.</li>
+            <li>Improved onboarding pages that reduce friction in signup and login.</li>
+            <li>A dashboard-like studio layout that feels usable from day one.</li>
+          </ul>
+          <div className="card" style={{ padding: '0.9rem', background: '#f8fafc' }}>
+            <p style={{ margin: 0, fontWeight: 600 }}>Built for momentum</p>
+            <p style={{ margin: '0.35rem 0 0', color: '#64748b' }}>
+              Keep your current backend and auth logic while shipping a significantly upgraded frontend.
+            </p>
+          </div>
+        </aside>
       </section>
 
-      <section style={{ marginTop: '2.5rem' }}>
-        <h2 style={{ fontSize: '1.5rem', marginBottom: '0.75rem' }}>Everything you need to start quickly</h2>
-        <p style={{ marginTop: 0, color: '#64748b' }}>A simple product shell designed for clarity and momentum.</p>
-
-        <div
-          style={{
-            marginTop: '1.5rem',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-            gap: 14,
-          }}
-        >
+      <section className="section">
+        <h2>Everything you need to ship version one</h2>
+        <p className="section-subtitle">A polished structure with modern UI patterns and room for rapid iteration.</p>
+        <div className="grid-3">
           {features.map((feature) => (
-            <article
-              key={feature.title}
-              style={{
-                backgroundColor: '#ffffff',
-                border: '1px solid #e2e8f0',
-                borderRadius: 14,
-                padding: '1.1rem',
-                boxShadow: '0 8px 20px rgba(15, 23, 42, 0.04)',
-              }}
-            >
-              <h3 style={{ marginTop: 0, marginBottom: '0.5rem', fontSize: '1.05rem' }}>{feature.title}</h3>
-              <p style={{ margin: 0, color: '#475569', lineHeight: 1.6 }}>{feature.description}</p>
+            <article key={feature.title} className="card feature-card">
+              <h3>{feature.title}</h3>
+              <p>{feature.description}</p>
             </article>
           ))}
         </div>

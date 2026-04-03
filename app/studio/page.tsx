@@ -10,105 +10,68 @@ export default async function StudioPage() {
   }
 
   return (
-    <main style={{ maxWidth: 1120, margin: '0 auto', padding: '1.25rem 1.25rem 2.5rem' }}>
-      <header
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          gap: 12,
-          marginBottom: '1.5rem',
-          flexWrap: 'wrap',
-        }}
-      >
+    <main className="page-shell">
+      <header className="top-nav card">
         <div>
-          <p style={{ margin: 0, color: '#64748b', fontWeight: 600, fontSize: '0.9rem' }}>Studio</p>
-          <h1 style={{ margin: '0.3rem 0 0', fontSize: '1.6rem' }}>Welcome, {user.name ?? user.email}</h1>
+          <p style={{ margin: 0, color: '#64748b', fontWeight: 700, fontSize: '0.85rem' }}>Studio Dashboard</p>
+          <h1 style={{ margin: '0.35rem 0 0', fontSize: '1.45rem' }}>Welcome back, {user.name ?? user.email}</h1>
         </div>
-        <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-          <Link
-            href="/"
-            style={{
-              padding: '0.6rem 0.9rem',
-              border: '1px solid #cbd5e1',
-              borderRadius: 10,
-              textDecoration: 'none',
-              color: '#0f172a',
-              backgroundColor: '#fff',
-            }}
-          >
+        <div className="action-row">
+          <Link href="/" className="ghost-button">
             Home
           </Link>
+          <Link href="/studio" className="soft-button">
+            Refresh view
+          </Link>
           <form action="/api/auth/logout" method="post">
-            <button
-              type="submit"
-              style={{
-                padding: '0.6rem 0.9rem',
-                border: '1px solid #fecaca',
-                borderRadius: 10,
-                backgroundColor: '#fff5f5',
-                color: '#b91c1c',
-                cursor: 'pointer',
-              }}
-            >
+            <button type="submit" className="danger-button">
               Log out
             </button>
           </form>
         </div>
       </header>
 
-      <section
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: 14,
-          alignItems: 'start',
-        }}
-      >
-        <article
-          style={{
-            borderRadius: 16,
-            border: '1px solid #e2e8f0',
-            backgroundColor: '#fff',
-            padding: '1.2rem',
-            boxShadow: '0 10px 25px rgba(15, 23, 42, 0.05)',
-          }}
-        >
-          <h2 style={{ margin: '0 0 0.6rem', fontSize: '1.15rem' }}>Project workspace</h2>
-          <p style={{ color: '#475569', marginTop: 0, lineHeight: 1.6 }}>
-            Your project canvas will appear here as features are added. For now, use the existing API endpoint to
-            create projects and manage data in v1.
+      <section className="dashboard-grid">
+        <article className="card panel">
+          <h2>Project workspace</h2>
+          <p>
+            Use this dashboard as the command center for your learning product. Your current setup is connected to
+            auth, API routes, and Prisma-backed storage.
           </p>
-          <p
-            style={{
-              margin: 0,
-              padding: '0.8rem',
-              borderRadius: 10,
-              backgroundColor: '#f8fafc',
-              border: '1px solid #e2e8f0',
-              fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
-              fontSize: '0.9rem',
-            }}
-          >
-            POST /api/projects
-          </p>
+          <p className="code-pill">POST /api/projects</p>
+          <div className="grid-3" style={{ marginTop: '0.9rem' }}>
+            <div className="metric">
+              <strong>Projects API</strong>
+              <span style={{ color: '#64748b' }}>Create and list projects via existing backend routes.</span>
+            </div>
+            <div className="metric">
+              <strong>Session state</strong>
+              <span style={{ color: '#64748b' }}>User context is protected by server-side session checks.</span>
+            </div>
+            <div className="metric">
+              <strong>Growth ready</strong>
+              <span style={{ color: '#64748b' }}>Add widgets, charts, and editing flows on top of this layout.</span>
+            </div>
+          </div>
         </article>
 
-        <aside
-          style={{
-            borderRadius: 16,
-            border: '1px solid #e2e8f0',
-            backgroundColor: '#fff',
-            padding: '1.1rem',
-            boxShadow: '0 10px 25px rgba(15, 23, 42, 0.05)',
-          }}
-        >
-          <h3 style={{ margin: '0 0 0.6rem', fontSize: '1rem' }}>Quick actions</h3>
-          <ul style={{ margin: 0, paddingLeft: '1rem', color: '#475569', lineHeight: 1.7 }}>
-            <li>Open your project API client.</li>
-            <li>Create a new project record.</li>
-            <li>Iterate on the studio experience.</li>
-          </ul>
+        <aside className="stack">
+          <section className="card panel">
+            <h3>Quick actions</h3>
+            <ul>
+              <li>Open an API client and create a new project record.</li>
+              <li>Expand studio modules with your own data visualizations.</li>
+              <li>Iterate on user workflows without touching auth internals.</li>
+            </ul>
+          </section>
+
+          <section className="card panel" style={{ background: 'linear-gradient(165deg, #ffffff, #f8fafc)' }}>
+            <h3>Current account</h3>
+            <p style={{ margin: 0 }}>
+              Signed in as <strong>{user.email}</strong>
+            </p>
+            <p style={{ marginBottom: 0 }}>Keep this panel for profile details, workspace switching, or billing info.</p>
+          </section>
         </aside>
       </section>
     </main>
