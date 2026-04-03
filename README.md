@@ -1,42 +1,42 @@
-# Interactive Learning Studio (Local-first v1)
+# Interactive Learning Studio
 
-Single Next.js application with PostgreSQL + Prisma and explicit server-side session auth.
+Local-first, self-hostable v1 foundation using a **single Next.js app** with **PostgreSQL + Prisma** and explicit **server-side session auth**.
 
-## Implemented
+## What is currently included
 
 - Single app architecture (no separate API service)
+- Prisma schema with `User`, `Session`, and `Project`
 - Local PostgreSQL via Docker Compose
-- Prisma models: `User`, `Session`, `Project`
-- Server-side session authentication using `httpOnly` cookie (`sid`)
-- Multiple sessions per user supported
-- No session rotation
-- Session revoked only on logout (or expiry)
-- Centralized API error response contract
-- Basic project APIs with ownership checks
+- Session auth with `httpOnly` cookie (`sid`)
+  - multiple sessions per user supported
+  - no rotation
+  - revoke on logout (or expiry)
+- Shared API error contract helper
+- Auth routes + basic protected project routes
 
 ## Local run steps
 
-1. Install dependencies:
+1. Install dependencies
    ```bash
    npm install
    ```
-2. Copy environment file:
+2. Copy environment file
    ```bash
    cp .env.example .env
    ```
-3. Start PostgreSQL locally:
+3. Start PostgreSQL locally
    ```bash
    docker compose -f docker/docker-compose.yml up -d
    ```
-4. Run migrations:
+4. Run migrations
    ```bash
    npm run prisma:migrate -- --name init
    ```
-5. Generate Prisma client:
+5. Generate Prisma client
    ```bash
    npm run prisma:generate
    ```
-6. Start app:
+6. Start the app
    ```bash
    npm run dev
    ```
@@ -54,7 +54,7 @@ Single Next.js application with PostgreSQL + Prisma and explicit server-side ses
 - `POST /api/projects`
 - `GET /api/projects/:projectId`
 
-## Shared API error contract
+## Shared API error response contract
 
 ```json
 {
@@ -69,8 +69,8 @@ Single Next.js application with PostgreSQL + Prisma and explicit server-side ses
 ## Manual verification checklist
 
 - [ ] `GET /api/health` returns 200.
-- [ ] Signup creates account and logs in user.
+- [ ] Signup creates account and authenticates user.
 - [ ] Login works with valid credentials.
 - [ ] Logout revokes only current session.
-- [ ] `/studio` redirects to `/login` when not authenticated.
-- [ ] Authenticated user can call `POST /api/projects` and then `GET /api/projects`.
+- [ ] `/studio` redirects to `/login` when unauthenticated.
+- [ ] Authenticated user can create/list/read own projects.
