@@ -42,6 +42,22 @@ Local-first, self-hostable v1 foundation using a **single Next.js app** with **P
    npm run dev
    ```
 
+7. Verify the app routes
+   ```bash
+   npm run build
+   npm run dev
+   ```
+   In another terminal:
+   ```bash
+   curl -i http://localhost:3000/
+   curl -i http://localhost:3000/login
+   curl -i http://localhost:3000/signup
+   curl -i http://localhost:3000/studio
+   curl -i http://localhost:3000/api/health
+   ```
+
+> Note: Docker is required for the local PostgreSQL workflow above.
+
 ## API summary
 
 ### Health
