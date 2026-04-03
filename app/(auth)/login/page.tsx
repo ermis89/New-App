@@ -14,25 +14,30 @@ export default function LoginPage() {
     setError(null);
     setLoading(true);
 
-    const formData = new FormData(event.currentTarget);
-    const email = String(formData.get('email') ?? '');
-    const password = String(formData.get('password') ?? '');
+    try {
+      const formData = new FormData(event.currentTarget);
+      const email = String(formData.get('email') ?? '');
+      const password = String(formData.get('password') ?? '');
 
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
 
-    if (!response.ok) {
-      const data = (await response.json()) as { error?: { message?: string } };
-      setError(data.error?.message ?? 'Login failed');
+      if (!response.ok) {
+        const data = (await response.json()) as { error?: { message?: string } };
+        setError(data.error?.message ?? 'Login failed');
+        return;
+      }
+
+      router.push('/studio');
+      router.refresh();
+    } catch {
+      setError('Network error. Please try again.');
+    } finally {
       setLoading(false);
-      return;
     }
-
-    router.push('/studio');
-    router.refresh();
   }
 
   return (
@@ -53,20 +58,40 @@ export default function LoginPage() {
         <p style={{ marginTop: 0, color: '#64748b' }}>Continue where you left off in your studio workspace.</p>
 
         <form onSubmit={onSubmit} style={{ display: 'grid', gap: 12, marginTop: '1.1rem' }}>
-          <input
-            name="email"
-            type="email"
-            placeholder="Email"
-            required
-            style={{ padding: '0.72rem 0.8rem', borderRadius: 10, border: '1px solid #cbd5e1', fontSize: '0.98rem' }}
-          />
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            required
-            style={{ padding: '0.72rem 0.8rem', borderRadius: 10, border: '1px solid #cbd5e1', fontSize: '0.98rem' }}
-          />
+          <fieldset disabled={loading} style={{ margin: 0, padding: 0, border: 'none', display: 'grid', gap: 12 }}>
+            <label style={{ display: 'grid', gap: 6, fontWeight: 500, color: '#0f172a' }}>
+              Email
+              <input
+                name="email"
+                type="email"
+                autoComplete="email"
+                placeholder="you@example.com"
+                required
+                style={{
+                  padding: '0.72rem 0.8rem',
+                  borderRadius: 10,
+                  border: '1px solid #cbd5e1',
+                  fontSize: '0.98rem',
+                }}
+              />
+            </label>
+            <label style={{ display: 'grid', gap: 6, fontWeight: 500, color: '#0f172a' }}>
+              Password
+              <input
+                name="password"
+                type="password"
+                autoComplete="current-password"
+                placeholder="Your password"
+                required
+                style={{
+                  padding: '0.72rem 0.8rem',
+                  borderRadius: 10,
+                  border: '1px solid #cbd5e1',
+                  fontSize: '0.98rem',
+                }}
+              />
+            </label>
+          </fieldset>
           <button
             type="submit"
             disabled={loading}
@@ -84,7 +109,11 @@ export default function LoginPage() {
           </button>
         </form>
 
-        {error ? <p style={{ color: 'crimson', marginBottom: 0 }}>{error}</p> : null}
+        {error ? (
+          <p role="alert" style={{ color: 'crimson', marginBottom: 0 }}>
+            {error}
+          </p>
+        ) : null}
 
         <p style={{ color: '#64748b', marginBottom: 0 }}>
           Need an account?{' '}
